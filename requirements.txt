@@ -3,4 +3,4 @@ pydrive2
 Pillow
 google-generativeai
 # force python version for Render
-python_version=="3.11.9"
+python_version==3.11.9
