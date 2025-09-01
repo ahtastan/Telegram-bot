@@ -18,8 +18,7 @@ GEMINI_API_KEY = os.getenv("AIzaSyDZFTrMyrF4Zi3JqcvLZIuU_lXbV_tyFE4")
 
 # --- Google Drive Setup ---
 gauth = GoogleAuth()
-gauth.LoadSettingsFile("settings.yaml")   # load service account config
-gauth.ServiceAuth()                       # authenticate with service account
+gauth.ServiceAuth()   # reads settings.yaml and credentials.json
 drive = GoogleDrive(gauth)
 
 if gauth.credentials is None:
