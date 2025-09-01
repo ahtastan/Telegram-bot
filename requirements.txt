@@ -1,2 +1,6 @@
 python-telegram-bot==13.5
 pydrive2
+Pillow
+google-generativeai
+# force python version for Render
+python_version=="3.11.9"
