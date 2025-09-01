@@ -17,8 +17,8 @@ TELEGRAM_BOT_TOKEN = os.getenv("7626755337:AAHse-ET97CuyMpvZDOFkhAGHasKt8f5zaY")
 GEMINI_API_KEY = os.getenv("AIzaSyDZFTrMyrF4Zi3JqcvLZIuU_lXbV_tyFE4")
 
 # --- Google Drive Setup ---
-gauth = GoogleAuth()
-gauth.ServiceAuth()   # reads settings.yaml and credentials.json
+gauth = GoogleAuth(settings_file="settings.yaml")
+gauth.ServiceAuth()  # authenticates with service account
 drive = GoogleDrive(gauth)
 
 if gauth.credentials is None:
@@ -90,4 +90,5 @@ def main():
     updater.idle()
 
 if __name__ == "__main__":
+
     main()
