@@ -1,3 +1,4 @@
 client_config_backend: service
+
 service_config:
-  client_service_account_json_file_path: credentials.json
+  client_json_file_path: credentials.json
