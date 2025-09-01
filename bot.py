@@ -13,8 +13,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # 🔑 Secrets from Render environment
-TELEGRAM_BOT_TOKEN = os.getenv("7626755337:AAHse-ET97CuyMpvZDOFkhAGHasKt8f5zaY")
-GEMINI_API_KEY = os.getenv("AIzaSyDZFTrMyrF4Zi3JqcvLZIuU_lXbV_tyFE4")
+TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # --- Google Drive Setup ---
 gauth = GoogleAuth(settings_file="settings.yaml")
@@ -92,3 +92,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
