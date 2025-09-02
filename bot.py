@@ -5,8 +5,6 @@ from PIL import Image
 import google.generativeai as genai
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
 
 # 🔧 Logging
 logging.basicConfig(level=logging.INFO)
@@ -15,20 +13,6 @@ logger = logging.getLogger(__name__)
 # 🔑 Secrets from Render environment
 TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
-# --- Google Drive Setup ---
-gauth = GoogleAuth(settings_file="settings.yaml")
-gauth.ServiceAuth()  # authenticates with service account
-drive = GoogleDrive(gauth)
-
-if gauth.credentials is None:
-    gauth.LocalWebserverAuth()   # first run locally
-elif gauth.access_token_expired:
-    gauth.Refresh()
-else:
-    gauth.Authorize()
-
-drive = GoogleDrive(gauth)
 
 # 🔁 Configure Gemini
 genai.configure(api_key=GEMINI_API_KEY)
@@ -44,12 +28,6 @@ def handle_photo(update: Update, context: CallbackContext):
     tmp_path = f"/tmp/{photo_file.file_id}.jpg"
     with open(tmp_path, "wb") as f:
         f.write(byte_data)
-
-    # Upload to Google Drive
-    gfile = drive.CreateFile({'title': f"{photo_file.file_id}.jpg"})
-    gfile.SetContentFile(tmp_path)
-    gfile.Upload()
-    logger.info("✅ Uploaded to Google Drive")
 
     # Open image with PIL
     image = Image.open(io.BytesIO(byte_data))
@@ -92,4 +70,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
